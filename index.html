@@ -212,6 +212,31 @@ details.about .abt{padding:0 16px 14px}
 </style>
 </head>
 <body class="home">
+<div id="passOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+  <div style="background:var(--surface);padding:30px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.1);text-align:center;">
+    <h2 style="margin-top:0;">Access Restricted</h2>
+    <p style="color:var(--muted);margin-bottom:20px;">Please enter the password to view this content.</p>
+    <div>
+      <input type="password" id="passInput" placeholder="Password" style="padding:10px;font-size:16px;border:1px solid var(--line);border-radius:8px;margin-bottom:10px;width:100%;box-sizing:border-box;">
+      <button onclick="checkPass()" style="padding:10px 20px;font-size:16px;cursor:pointer;background:var(--acc);color:#fff;border:none;border-radius:8px;width:100%;font-weight:bold;">Unlock</button>
+    </div>
+    <p id="passError" style="color:var(--rose);display:none;margin-top:15px;font-size:14px;">Incorrect password. Try again.</p>
+  </div>
+</div>
+<script>
+function checkPass() {
+  if(document.getElementById('passInput').value === 'degakya') {
+    document.getElementById('passOverlay').style.display = 'none';
+  } else {
+    document.getElementById('passError').style.display = 'block';
+  }
+}
+document.getElementById('passInput').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    checkPass();
+  }
+});
+</script>
 <header class="bar">
   <button class="ico burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <div class="btitle"><b>Crypto Module 3 — Key Management</b><span id="where">Start · Overview</span></div>
